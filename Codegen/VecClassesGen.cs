@@ -13,16 +13,19 @@ public class VecClassesGen
         {
             var genericTypes = $"<{string.Join(", ", Enumerable.Range(0, i).Select(GenType))}>";
             var properties = string.Join(", ", Enumerable.Range(0, i).Select(index => $"{GenType(index)} {GenPropertyName(index)}"));
-            var interfaces = string.Join('\n', Enumerable.Range(0, i).Select(index => $"where {GenType(index)} : unmanaged"));
+            var interfaces = string.Join('\n', Enumerable.Range(0, i).Select(index => $"        where {GenType(index)} : unmanaged"));
+            var methArgs = string.Join(", ", Enumerable.Range(0, i).Select(index => $"{GetType(index)} {GetArgName(index)}"));
+            var ctorArgs = string.Join(", ", Enumerable.Range(0, i).Select(index => $"a.{GetArgName(index)}"));
+            var ctorPtrArgs = string.Join(", ", Enumerable.Range(0, i).Select(index => $"a->{GetPropertyName(index)}"));
+            var anonArgs = string.Join(", ", Enumerable.Range(0, i).Select(index => $"a.{GetPropertyName(index)}"));
             return 
 $@"
 public unsafe record struct Vec{genericTypes}({properties})
-    where T : unmanaged 
-    where T1 : unmanaged
+{interfaces}
 {{
-    public static implicit operator Vec{genericTypes}((T a0, T1 a1) a) => new(a.a0, a.a1);
-    public static implicit operator Vec{genericTypes}(Vec{genericTypes}* a) => new(a->_, a->_1);
-    public static explicit operator (T a0, T1 a1)({genericTypes} a) => (a._, a._1);
+    public static implicit operator Vec{genericTypes}(({methArgs}) a) => new({ctorArgs});
+    public static implicit operator Vec{genericTypes}(Vec{genericTypes}* a) => new(ctorPtrArgs);
+    public static explicit operator ({methArgs})({genericTypes} a) => ({anonArgs});
 }}
 ";
             string GenType(int index) => index == 0 ? "T" : $"T{index}";
