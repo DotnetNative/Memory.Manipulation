@@ -12,12 +12,12 @@ public class VecClassesGen
     public static string Exec(int count = 16) => Join("\n", Range(2, count).Select(i =>
     {
         var genericTypes = $"<{Join(", ", Range(0, i).Select(GenType))}>",
-            properties = string.Join(", ", Range(0, i).Select(index => $"{GenType(index)} {GenPropertyName(index)}")),
-            interfaces = string.Join('\n', Range(0, i).Select(index => $"        where {GenType(index)} : unmanaged")),
-            methArgs = string.Join(", ", Range(0, i).Select(index => $"{GetType(index)} {GetArgName(index)}")),
-            ctorArgs = string.Join(", ", Range(0, i).Select(index => $"a.{GetArgName(index)}")),
-            ctorPtrArgs = string.Join(", ", Range(0, i).Select(index => $"a->{GetPropertyName(index)}")),
-            anonArgs = string.Join(", ", Range(0, i).Select(index => $"a.{GetPropertyName(index)}"));
+            properties = Join(", ", Range(0, i).Select(index => $"{GenType(index)} {GenPropertyName(index)}")),
+            interfaces = Join('\n', Range(0, i).Select(index => $"        where {GenType(index)} : unmanaged")),
+            methArgs = Join(", ", Range(0, i).Select(index => $"{GetType(index)} {GetArgName(index)}")),
+            ctorArgs = Join(", ", Range(0, i).Select(index => $"a.{GetArgName(index)}")),
+            ctorPtrArgs = Join(", ", Range(0, i).Select(index => $"a->{GetPropertyName(index)}")),
+            anonArgs = Join(", ", Range(0, i).Select(index => $"a.{GetPropertyName(index)}"));
         return 
 $@"
 public unsafe record struct Vec{genericTypes}({properties})
