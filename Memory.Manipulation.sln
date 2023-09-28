@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Memory.Manipulation", "Memory.Manipulation\Memory.Manipulation.csproj", "{E519666E-8E08-4652-98A5-F5AE1C997A11}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codegen", "Codegen\Codegen.csproj", "{206E27A6-BC15-44C3-B8E7-B4816DE8C6AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{E519666E-8E08-4652-98A5-F5AE1C997A11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E519666E-8E08-4652-98A5-F5AE1C997A11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E519666E-8E08-4652-98A5-F5AE1C997A11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{206E27A6-BC15-44C3-B8E7-B4816DE8C6AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{206E27A6-BC15-44C3-B8E7-B4816DE8C6AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{206E27A6-BC15-44C3-B8E7-B4816DE8C6AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{206E27A6-BC15-44C3-B8E7-B4816DE8C6AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
