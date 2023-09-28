@@ -24,7 +24,7 @@ public unsafe record struct Vec{genericTypes}({properties})
 {interfaces}
 {{
     public static implicit operator Vec{genericTypes}(({methArgs}) a) => new({ctorArgs});
-    public static implicit operator Vec{genericTypes}(Vec{genericTypes}* a) => new(ctorPtrArgs);
+    public static implicit operator Vec{genericTypes}(Vec{genericTypes}* a) => new({ctorPtrArgs});
     public static explicit operator ({methArgs})({genericTypes} a) => ({anonArgs});
 }}
 ";
