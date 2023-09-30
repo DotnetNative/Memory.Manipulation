@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 namespace Memory.Manipulation;
 public static class Mem
 {
-    public 
+
 }
