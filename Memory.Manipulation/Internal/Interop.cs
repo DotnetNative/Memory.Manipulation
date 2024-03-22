@@ -1,12 +1,5 @@
-﻿using Memory;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
+﻿using System.ComponentModel;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Memory.Internal;
 #region Enum
@@ -34,7 +27,7 @@ public enum MemProtect : int
     NoCache = 512
 }
 
-public enum MemType : int 
+public enum MemType : int
 {
     Image = 0x1000000,
     Mapped = 0x40000,
@@ -46,20 +39,17 @@ public enum MemType : int
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct MBI
 {
-    public MemReg AsMemReg => new MemReg(BaseAddress, BaseAddress + RegionSize, RegionSize, State, Protect, Type);
     public unsafe byte* BaseAddress;
-
     public unsafe byte* AllocationBase;
-
     public uint AllocationProtect;
-
     public nint RegionSize;
-
     public MemState State;
-
     public MemProtect Protect;
-
     public MemType Type;
+
+    public MemReg AsMemReg => new(BaseAddress, BaseAddress + RegionSize, RegionSize, State, Protect, Type);
+
+    public override string ToString() => $"BaseAddr: {(nint)BaseAddress}, AllocAddr: {(nint)AllocationBase}, AllocProtect: {AllocationProtect}, Size: {RegionSize}, State: {State}, Protect: {Protect}, Type: {Type}";
 }
 
 [StructLayout(LayoutKind.Sequential)]
@@ -75,23 +65,24 @@ public unsafe struct MemReg
         Type = type;
     }
 
-    public unsafe byte* Start;
-    public unsafe byte* End;
+    public byte* Start;
+    public byte* End;
     public IntPtr Size;
     public MemState State;
     public MemProtect Protect;
     public MemType Type;
+
+    public override string ToString() => $"BaseAddr: {(nint)Start}, Size: {Size}, State: {State}, Protect: {Protect}, Type: {Type}";
+
+    public nint GetModuleToAddr(nint addr) => Math.Abs((nint)Start - addr);
 }
 #endregion
 
-public/*internal*/ class Interop
+internal class Interop
 {
-    #region DllImport
-    const string kernel = "kernel32";
-
-    [DllImport(kernel)]
-    public unsafe static extern bool VirtualQuery(byte* lpAddress, MBI* lpBuffer, int dwLength);
-    #endregion
+    [DllImport("kernel32")]
+    public unsafe static extern
+        bool VirtualQuery(byte* lpAddress, MBI* lpBuffer, int dwLength);
 
     #region Method
     public unsafe static MBI QueryVirtualMemory(byte* baseAddress)
@@ -104,8 +95,8 @@ public/*internal*/ class Interop
 
     public unsafe static List<MemReg> GetMemoryRegions(byte* baseAddress = null, bool filterGuard = false)
     {
-        List<MemReg> result = new();
-        MBI mbi = new MBI();
+        var result = new List<MemReg>();
+        MBI mbi;
 
         Query(baseAddress);
 
@@ -129,7 +120,10 @@ public/*internal*/ class Interop
                 return;
 
             if (filterGuard)
-                if (mbi.Protect == MemProtect.Guard || mbi.Protect == MemProtect.ReadWriteGuard)
+                if (mbi.Protect == MemProtect.Guard ||
+                    mbi.Protect == MemProtect.ReadWriteGuard ||
+                    mbi.Protect == MemProtect.NoAccess ||
+                    mbi.Protect == MemProtect.NoCache)
                     return;
 
             result.Add(mbi.AsMemReg);

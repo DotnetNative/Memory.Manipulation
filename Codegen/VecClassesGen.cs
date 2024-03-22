@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using static System.Linq.Enumerable;
+﻿using static System.Linq.Enumerable;
 using static System.String;
-using System.Threading.Tasks;
-using System.Runtime.InteropServices;
 
 namespace Codegen;
 public class VecClassesGen
@@ -19,7 +13,7 @@ public class VecClassesGen
             ctorArgs = Join(", ", Range(0, i).Select(index => $"a.{GenArgName(index)}")),
             ctorPtrArgs = Join(", ", Range(0, i).Select(index => $"a->{GenPropertyName(index)}")),
             anonArgs = Join(", ", Range(0, i).Select(index => $"a.{GenPropertyName(index)}"));
-        return 
+        return
 $@"
 [StructLayout(LayoutKind.Sequential)]
 public unsafe record struct Vec{genericTypes}({properties})
