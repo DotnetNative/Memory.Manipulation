@@ -1,12 +1,7 @@
-﻿using Memory.Internal;
-
-namespace Memory.SigScan.Patterns;
+﻿namespace Memory.SigScan;
 public class MultiPattern : AbstractPattern
 {
-    public MultiPattern(List<AbstractPattern> patternts) : base(-1)
-    {
-        Patterns = patternts;
-    }
+    public MultiPattern(List<AbstractPattern> patternts) : base(-1) => Patterns = patternts;
 
     public readonly List<AbstractPattern> Patterns;
 

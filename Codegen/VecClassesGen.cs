@@ -1,9 +1,7 @@
-﻿using static System.Linq.Enumerable;
-using static System.String;
-
-namespace Codegen;
+﻿namespace Codegen;
 public class VecClassesGen
 {
+    /* This is old. Now it use struct with constructor */
     public static string Exec(int count = 16) => Join("\n", Range(2, count).Select(i =>
     {
         string genericTypes = $"<{Join(", ", Range(0, i).Select(GenType))}>",

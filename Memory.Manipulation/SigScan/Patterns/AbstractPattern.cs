@@ -1,9 +1,8 @@
-﻿using Memory.Internal;
-
-namespace Memory.SigScan.Patterns;
+﻿namespace Memory.SigScan;
 public unsafe abstract class AbstractPattern
 {
     public AbstractPattern(int length) => Length = length;
+
     public readonly int Length;
 
     public abstract void Scan(List<nint> result, MemReg* regPtr);

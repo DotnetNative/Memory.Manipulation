@@ -1,6 +1,4 @@
-﻿using Memory.Internal;
-
-namespace Memory.SigScan.Patterns;
+﻿namespace Memory.SigScan;
 public unsafe abstract class ValuePattern : AbstractPattern
 {
     public ValuePattern(byte typeSize) : base(typeSize) => TypeSize = typeSize;
@@ -13,10 +11,7 @@ public unsafe abstract class ValuePattern : AbstractPattern
 
 public unsafe class ValueBytePattern : ValuePattern
 {
-    public ValueBytePattern(byte value) : base(sizeof(byte))
-    {
-        Value = value;
-    }
+    public ValueBytePattern(byte value) : base(sizeof(byte)) => Value = value;
 
     public readonly byte Value;
 
@@ -39,10 +34,7 @@ public unsafe class ValueBytePattern : ValuePattern
 
 public unsafe class ValueShortPattern : ValuePattern
 {
-    public ValueShortPattern(short value) : base(sizeof(short))
-    {
-        Value = value;
-    }
+    public ValueShortPattern(short value) : base(sizeof(short)) => Value = value;
 
     public readonly short Value;
 
@@ -77,10 +69,7 @@ public unsafe class ValueShortPattern : ValuePattern
 
 public unsafe class ValueIntPattern : ValuePattern
 {
-    public ValueIntPattern(int value) : base(sizeof(int))
-    {
-        Value = value;
-    }
+    public ValueIntPattern(int value) : base(sizeof(int)) => Value = value;
 
     public readonly int Value;
 
@@ -115,10 +104,7 @@ public unsafe class ValueIntPattern : ValuePattern
 
 public unsafe class ValueLongPattern : ValuePattern
 {
-    public ValueLongPattern(long value) : base(sizeof(long))
-    {
-        Value = value;
-    }
+    public ValueLongPattern(long value) : base(sizeof(long)) => Value = value;
 
     public readonly long Value;
 

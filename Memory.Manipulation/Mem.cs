@@ -1,10 +1,23 @@
-﻿using Memory.Internal;
-using Memory.SigScan.Patterns;
-
-namespace Memory.Manipulation;
+﻿namespace Memory;
 public unsafe static class Mem
 {
-    public static List<MemReg> GetRegions() => Interop.GetMemoryRegions(filterGuard: true);
+    public static List<MemReg> GetRegions() => Interop.GetMemoryRegions(null, mbi =>
+    {
+        if (mbi.State != MemState.Commit)
+            return false;
+
+        if (mbi.Protect == MemProtect.ZeroAccess)
+            return false;
+
+        if (mbi.Protect == MemProtect.Guard ||
+            mbi.Protect == MemProtect.ReadWriteGuard ||
+            mbi.Protect == MemProtect.NoAccess ||
+            mbi.Protect == MemProtect.NoCache)
+            return false;
+
+        return true;
+    });
+    public static List<MemReg> GetRegions(Func<MBI, bool> filter) => Interop.GetMemoryRegions(null, filter);
 
     public static ValueBytePattern CreatePattern(byte val) => new ValueBytePattern(val);
     public static ValueShortPattern CreatePattern(short val, bool aligned = true) => new ValueShortPattern(val) { Aligned = aligned };
@@ -92,7 +105,6 @@ public unsafe static class Mem
 
         return result;
     }
-
 
     public static nint CalcOffsets(nint baseAddr, params int[] offsets)
     {

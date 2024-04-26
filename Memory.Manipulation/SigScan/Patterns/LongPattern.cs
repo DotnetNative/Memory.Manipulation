@@ -1,6 +1,4 @@
-﻿using Memory.Internal;
-
-namespace Memory.SigScan.Patterns;
+﻿namespace Memory.SigScan;
 /* Only for patterns with [n % sizeof(long)] length */
 public unsafe class LongPattern : AbstractPattern
 {

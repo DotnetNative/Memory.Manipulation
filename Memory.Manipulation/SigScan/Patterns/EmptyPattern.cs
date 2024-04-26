@@ -1,6 +1,4 @@
-﻿using Memory.Internal;
-
-namespace Memory.SigScan.Patterns;
+﻿namespace Memory.SigScan;
 public class EmptyPattern : AbstractPattern
 {
     public EmptyPattern() : base(0) { }

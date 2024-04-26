@@ -1,6 +1,4 @@
-﻿using Memory.Internal;
-
-namespace Memory.SigScan.Patterns;
+﻿namespace Memory.SigScan;
 public unsafe class HardPattern : AbstractPattern
 {
     public HardPattern(long[] primaryMask, byte[] secondaryMask) : base(primaryMask.Length * sizeof(long) + secondaryMask.Length)

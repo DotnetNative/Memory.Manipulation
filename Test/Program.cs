@@ -1,4 +1,4 @@
-﻿using Memory.Manipulation;
+﻿using Memory;
 
 unsafe class Program
 {

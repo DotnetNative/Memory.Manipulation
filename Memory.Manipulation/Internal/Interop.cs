@@ -1,8 +1,4 @@
-﻿using System.ComponentModel;
-using System.Runtime.InteropServices;
-
-namespace Memory.Internal;
-#region Enum
+﻿#region Enum
 public enum MemState : int
 {
     Commit = 0x1000,
@@ -39,8 +35,8 @@ public enum MemType : int
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct MBI
 {
-    public unsafe byte* BaseAddress;
-    public unsafe byte* AllocationBase;
+    public byte* BaseAddress;
+    public byte* AllocationBase;
     public uint AllocationProtect;
     public nint RegionSize;
     public MemState State;
@@ -55,7 +51,7 @@ public unsafe struct MBI
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct MemReg
 {
-    public unsafe MemReg(byte* start, byte* end, nint size, MemState state, MemProtect protect, MemType type)
+    public MemReg(byte* start, byte* end, nint size, MemState state, MemProtect protect, MemType type)
     {
         Start = start;
         End = end;
@@ -81,19 +77,19 @@ public unsafe struct MemReg
 internal class Interop
 {
     [DllImport("kernel32")]
-    public unsafe static extern
-        bool VirtualQuery(byte* lpAddress, MBI* lpBuffer, int dwLength);
+    internal unsafe static extern
+        bool VirtualQuery(byte* address, MBI* buffer, int length);
 
     #region Method
-    public unsafe static MBI QueryVirtualMemory(byte* baseAddress)
+    internal unsafe static MBI QueryVirtualMemory(byte* baseAddress)
     {
-        var mbi = new MBI();
+        MBI mbi;
         if (!VirtualQuery(baseAddress, &mbi, sizeof(MBI)))
             throw new Win32Exception();
         return mbi;
     }
 
-    public unsafe static List<MemReg> GetMemoryRegions(byte* baseAddress = null, bool filterGuard = false)
+    internal unsafe static List<MemReg> GetMemoryRegions(byte* baseAddress, Func<MBI, bool> filter)
     {
         var result = new List<MemReg>();
         MBI mbi;
@@ -113,18 +109,8 @@ internal class Interop
         {
             mbi = QueryVirtualMemory(addr);
 
-            if (mbi.State != MemState.Commit)
+            if (!filter(mbi))
                 return;
-
-            if (mbi.Protect == MemProtect.ZeroAccess)
-                return;
-
-            if (filterGuard)
-                if (mbi.Protect == MemProtect.Guard ||
-                    mbi.Protect == MemProtect.ReadWriteGuard ||
-                    mbi.Protect == MemProtect.NoAccess ||
-                    mbi.Protect == MemProtect.NoCache)
-                    return;
 
             result.Add(mbi.AsMemReg);
         }

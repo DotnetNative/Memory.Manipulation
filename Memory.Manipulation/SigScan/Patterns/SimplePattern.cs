@@ -1,6 +1,4 @@
-﻿using Memory.Internal;
-
-namespace Memory.SigScan.Patterns;
+﻿namespace Memory.SigScan;
 public abstract unsafe class SimplePattern : AbstractPattern
 {
     public SimplePattern(int size, int typeSize) : base(size * typeSize)
@@ -18,10 +16,7 @@ public abstract unsafe class SimplePattern : AbstractPattern
 /* Only for patterns with [3, 5, 7, 9, 11, 13, 15] length */
 public class SimpleBytePattern : SimplePattern
 {
-    public SimpleBytePattern(params byte[] mask) : base(mask.Length, sizeof(byte))
-    {
-        Mask = mask;
-    }
+    public SimpleBytePattern(params byte[] mask) : base(mask.Length, sizeof(byte)) => Mask = mask;
 
     public readonly byte[] Mask;
 
@@ -65,10 +60,7 @@ public class SimpleBytePattern : SimplePattern
 /* Only for patterns with [12] length */
 public class SimpleShortPattern : SimplePattern
 {
-    public SimpleShortPattern(params short[] mask) : base(mask.Length, sizeof(short))
-    {
-        Mask = mask;
-    }
+    public SimpleShortPattern(params short[] mask) : base(mask.Length, sizeof(short)) => Mask = mask;
 
     public readonly short[] Mask;
 
@@ -113,10 +105,7 @@ public class SimpleShortPattern : SimplePattern
 /* Only for patterns with [6, 10, 14] length */
 public class SimpleIntPattern : SimplePattern
 {
-    public SimpleIntPattern(params int[] mask) : base(mask.Length, sizeof(int))
-    {
-        Mask = mask;
-    }
+    public SimpleIntPattern(params int[] mask) : base(mask.Length, sizeof(int)) => Mask = mask;
 
     public readonly int[] Mask;
 
