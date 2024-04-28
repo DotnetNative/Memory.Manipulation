@@ -52,6 +52,11 @@ var shifted = Mem.CalcOffsets(pointer, 0, 8, 0x90, 0);
 */
 ```
 
+Used Libraries
+------------------------------
+**DotnetNativeBase** [![NuGet](https://img.shields.io/nuget/v/DotnetNativeBase.svg)](https://www.nuget.org/packages/DotnetNativeBase) \
+**Yotic.Memory.Extensions** [![NuGet](https://img.shields.io/nuget/v/Yotic.Memory.Extensions.svg)](https://www.nuget.org/packages/Yotic.Memory.Extensions)
+
 Versions
 ------------------------------
 | Start ordinal | Framework | Description                  | Date         |
