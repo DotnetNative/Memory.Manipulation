@@ -56,6 +56,6 @@ Versions
 ------------------------------
 | Start ordinal | Framework | Description                  | Date         |
 | ---           | ---       | ---                          | ---          |
-| 1.0.0         | .net8.0   | Published                    | Apr 28, 2024 |
+| 1.0.0         | .net8.0   | Published                    | Apr 29, 2024 |
 |               | .net8.0   | Changed framework            | Apr 26, 2024 |
 |               | .net7.0   |                              | Sep 28, 2023 |
