@@ -28,7 +28,7 @@ public unsafe class LongPattern : AbstractPattern
         byte degress = 0;
         var defVal = mask[0];
         var val = defVal;
-        for (; start < end;)
+        while (start < end)
         {
             if (*((long*)start + degress) == val)
             {

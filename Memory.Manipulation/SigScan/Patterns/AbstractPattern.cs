@@ -9,7 +9,7 @@ public unsafe abstract class AbstractPattern
 
     public List<nint> Scan(MemReg* regPtr)
     {
-        var result = new List<nint>();
+        List<nint> result = [];
         Scan(result, regPtr);
         return result;
     }

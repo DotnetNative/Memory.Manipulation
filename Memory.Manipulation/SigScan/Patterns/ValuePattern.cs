@@ -23,7 +23,7 @@ public unsafe class ValueBytePattern : ValuePattern
         var start = reg.Start;
         var end = GetEnd(reg.End);
 
-        for (; start < end;)
+        while (start < end)
         {
             if (*start == value)
                 result.Add((nint)start);
@@ -48,7 +48,7 @@ public unsafe class ValueShortPattern : ValuePattern
 
         if (Aligned)
         {
-            for (; start < end;)
+            while (start < end)
             {
                 if (*start == value)
                     result.Add((nint)start);
@@ -57,7 +57,7 @@ public unsafe class ValueShortPattern : ValuePattern
         }
         else
         {
-            for (; start < end;)
+            while (start < end)
             {
                 if (*start == value)
                     result.Add((nint)start);
@@ -83,16 +83,16 @@ public unsafe class ValueIntPattern : ValuePattern
 
         if (Aligned)
         {
-            for (; start < end;)
+            while (start < end)
             {
-                if (*start == value)
+                    if (*start == value)
                     result.Add((nint)start);
                 start++;
             }
         }
         else
         {
-            for (; start < end;)
+            while (start < end)
             {
                 if (*start == value)
                     result.Add((nint)start);
@@ -118,7 +118,7 @@ public unsafe class ValueLongPattern : ValuePattern
 
         if (Aligned)
         {
-            for (; start < end;)
+            while (start < end)
             {
                 if (*start == value)
                     result.Add((nint)start);
@@ -127,7 +127,7 @@ public unsafe class ValueLongPattern : ValuePattern
         }
         else
         {
-            for (; start < end;)
+            while (start < end)
             {
                 if (*start == value)
                     result.Add((nint)start);

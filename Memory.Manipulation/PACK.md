@@ -1,0 +1,1 @@
+﻿Library for memory manipulating, get regions, set rights, use pattern scan

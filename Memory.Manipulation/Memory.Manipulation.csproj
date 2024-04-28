@@ -1,30 +1,50 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <RootNamespace>Memory</RootNamespace>
+    <Version>1.0.0</Version>
+    <Company>Yotic</Company>
+    <RepositoryUrl>https://github.com/DotnetNative/Memory.Manipulation</RepositoryUrl>
+    <PackageTags>dnb;naot;korn;memory</PackageTags>
+	<PackageReadmeFile>PACK.md</PackageReadmeFile>
+	<IncludeContentInPack>true</IncludeContentInPack>
+	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/DotnetNative/Memory.Manipulation</PackageProjectUrl>
+    <Description>Library for memory manipulating, get regions, set rights, use pattern scan</Description>
+    <Title>Memory.Manipulation</Title>
+    <Platforms>x64</Platforms>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="obj\**" />
     <EmbeddedResource Remove="obj\**" />
     <None Remove="obj\**" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="Yotic.Memory.Extensions" Version="2.0.0" />
+	<None Include="PACK.md">
+		<Pack>true</Pack>
+		<PackagePath></PackagePath>
+		<Visible>False</Visible>
+	</None>   
+	<None Include="..\LICENSE.txt">
+	    <Pack>true</Pack>
+	    <PackagePath></PackagePath>
+	    <Visible>False</Visible>
+	</None>
   </ItemGroup>
-
+  <ItemGroup>
+    <PackageReference Include="DotnetNativeBase" Version="1.0.3" />
+    <PackageReference Include="Yotic.Memory.Extensions" Version="2.0.1" />
+  </ItemGroup>
   <ItemGroup>
     <Using Include="Memory.MemEx">
       <Static>True</Static>
     </Using>
     <Using Include="Memory.SigScan" />
     <Using Include="System.ComponentModel" />
+    <Using Include="System.Globalization" />
     <Using Include="System.Runtime.InteropServices" />
   </ItemGroup>
-
 </Project>

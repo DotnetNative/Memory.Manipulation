@@ -33,7 +33,7 @@ public class SimpleBytePattern : SimplePattern
         byte degress = 0;
         var defVal = mask[0];
         var val = defVal;
-        for (; start < end;)
+        while (start < end)
         {
             if (start[degress] == val)
             {
@@ -78,7 +78,7 @@ public class SimpleShortPattern : SimplePattern
         byte degress = 0;
         var defVal = mask[0];
         var val = defVal;
-        for (; start < end;)
+        while (start < end)
         {
             if (*((short*)start + degress) == val)
             {
@@ -123,7 +123,7 @@ public class SimpleIntPattern : SimplePattern
         byte degress = 0;
         var defVal = mask[0];
         var val = defVal;
-        for (; start < end;)
+        while (start < end)
         {
             if (*((int*)start + degress) == val)
             {
