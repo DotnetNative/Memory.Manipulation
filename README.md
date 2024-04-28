@@ -1,6 +1,6 @@
 # Memory.Manipulation [![NuGet](https://img.shields.io/nuget/v/Yotic.Memory.Manipulation.svg)](https://www.nuget.org/packages/Yotic.Memory.Manipulation)
 
-Library for memory manipulating, get regions, set rights, use pattern scan, calc offsets, validate pointers and etc
+Library for memory manipulating, get regions, set rights, use pattern scan, calculate offsets, validate pointers and etc
 
 Get regions
 ------------------------------
